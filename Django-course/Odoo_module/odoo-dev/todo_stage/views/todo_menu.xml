@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="todo_stage_tag_action" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">todo.task.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem 
+        id="todo_stage_menu" 
+        name="Tags" 
+        sequence="2" 
+        action="todo_stage_tag_action" 
+        parent="todo_app.todo_app_config_menu"
+        />
+
+</odoo>

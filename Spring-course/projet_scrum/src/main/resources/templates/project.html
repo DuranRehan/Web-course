@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <h1>Project</h1>
+        <p>Project page</p>
+        <div th:if="${#lists.isEmpty(projects)}" th:un>
+            <p th:text="#{label_no_course_found}">Aucun cours n'est disponible</p>
+        </div>
+        <table th:unless="${#lists.isEmpty(projects)}">
+
+            <thead>
+                <tr>
+                    <th th:text="#{label_project_name}">Name</th>
+                    <th th:text="#{label_project_sprints}">Sprints</th>
+                    <th th:text="#{label_project_active}">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="project : ${projects}">
+                    <td>
+                        <a  th:text="${project.name}">Project name</a>
+                    </td>
+                    <td>
+                        <a
+                            th:text="${project.sprints.size()}">Sprints</a>
+                    </td>
+                    <td>
+                        <span th:if="${project.active}" th:text="#{label_is_active}">En cours</span>
+                        <span th:unless="${project.active}" th:text="#{label_is_not_active}">Terminé</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
+    <title th:text="${course.id}"></title>
+
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <h1 id="subtitle" th:text="|${course.id} - ${course.title} - ${course.credits} |">Détails du cours</h1>
+        <div th:if="${#lists.isEmpty(course.students)}" th:un>
+            <p th:text="#{label_no_student_found}">Aucun étudiants n'est encore inscrit</p>
+        </div>
+        <table th:unless="${#lists.isEmpty(course.students)}">
+            <thead>
+                <tr>
+                    <th number th:text="#{label_student_number}">Matricule</th>
+                    <th th:text="#{label_name}">Nom</th>
+                    <th th:text="#{label_gender}">Genre</th>
+                    <th th:text="#{label_section}">Section</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${course.students}">
+                    <td>
+                        <a th:href="@{/student/detail(id=${student.matricule})}" th:text="${student.matricule}"></a>
+                    </td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.genre}"></td>
+                    <td th:text="${student.section}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/courses/detail/add_student_to_course}" method="post">
+            <input type="hidden" name="courseId" th:value="${course.id}"/>
+            <input type="number" name="studentId" th:placeholder="#{label_student_number}"/>
+            <input type="submit" th:value="#{btn_add_student}"/>
+        </form>
+    </main>
+</body>
+
+</html>

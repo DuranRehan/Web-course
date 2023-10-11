@@ -1,0 +1,13 @@
+package webg6.revision.g56055.projet_scrum.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class SecurityController {
+    @GetMapping("/login")
+    public String login() {
+        return "login/login";
+    }
+
+}

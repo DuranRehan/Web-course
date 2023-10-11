@@ -1,0 +1,30 @@
+<div th:fragment="detailstudent(student,annualProg)">
+    <h2>Fiche étudiant</h2>
+    <span>Nom : </span><h5 th:text="${student.name}"></h5>
+    <span>Matricule : </span><h6 th:text="${student.number}"></h6>
+    <span>Section : </span><h6 th:text="${student.section}"></h6>
+    <span>Quadrimestre : </span><h6 th:text="${student.bloc}"></h6>
+    <h4 th:if="${annualProg == null}">l'étudiant n'a pas encore de pae</h4>
+    <div th:unless="${annualProg == null}">
+        <table >
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Intitulé</td>
+                    <td>ECTS</td>
+                    <td>Quadri</td>
+                    <td>Obligatoire</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  th:each="cours : ${annualProg.registrations}">
+                    <td th:text="${cours.unit_id.id}"></td>
+                    <td th:text="${cours.unit_id.title}"></td>
+                    <td th:text="${cours.unit_id.ects}"></td>
+                    <td th:text="${cours.unit_id.semester}"></td>
+                    <td th:if="${cours.mandatory == true}">✔️</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+{% extends "_base.html" %}
+{% block title %}catalogue{% endblock title %}
+{% block title_h2 %}Catalogue{% endblock title_h2 %}
+{% block bodyContent %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div id="status-message" class="alert-danger">
+                {{ message }}
+            </div>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div id="status-message" class="alert-success">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#status-message').fadeOut('fast');
+            }, 3000);
+        });
+    </script>
+{% endif %}
+<div class="card-deck">
+    {% for appart in appartements %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="data:image/jpeg;base64,{{appart.image}}" class="card-img-top" alt="{{appart.details_name}}">
+            <div class="card-body">
+                <h5 class="card-title">{{appart.name}}</h5>
+                <p class="card-text">
+                    <span class="font-weight-bold">Description</span> :<br> 
+                    {{appart.desc}}
+                </p>
+            </div>
+            <p class="card-text p-2">
+                <span class="font-weight-bold">Quantity</span><span> : x{{appart.qte}}
+                <br>
+                <span class="font-weight-bold">Initial price</span> : {{appart.minimal_price}}€
+                <br>
+                <span class="font-weight-bold">Best offer</span> : {{appart.buyer_bid}}€
+            </p>
+            {% if appart.qte == 0 %}
+                <a href="#" class="btn btn-danger disabled">Out of stock</a>
+            {% else %}
+                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#offerModal{{appart.id}}">Make offer</a>
+            {% include 'odoo_offer/_make_offer_modal.html' %}
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+        <div class="container" >
+            <h3 class="text-center">No appartement available</h3>
+        </div>
+    {% endfor %}
+</div>
+{% endblock bodyContent %}

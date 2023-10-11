@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>MonoPage</title>
+</head>
+
+<body>
+    <header>
+        <div id="head-div">
+            <h1>Programme annuel des étudiants</h1>
+            <img th:src="@{/img/logo.jpeg}" alt="logo-HE2B">
+            <h2>
+                HE2B-ESI / WEBG5 / G56055 / 2022-2023
+            </h2>
+        </div>
+    </header>
+    <main>
+        <div id="allCourses">
+            <select name="select-course" id="select-course" @change="detailsCourse($event.target.value)" @click="getAllCourses">
+                <option v-if="courses.length == 0" value="0">Select a course...</option>
+                <option v-for="course in courses" :value="course.id" @click="detailsCourse('ERPG5')">
+                    {{course.id}} - {{course.title}}
+                </option>
+            </select>
+            <h3 v-if="courses.length == 0">Veuillez selectionné un cours...</h3>
+            <ul id="details-courses">
+            </ul>
+        </div>
+
+        <script th:src="@{/js/pae.js}"></script>
+    </main>
+
+    <footer>
+        <div>
+            <p>HE2B - 2022-2023, Duran Rehan G56055</p>
+        </div>
+    </footer>
+</body>
+
+</html>

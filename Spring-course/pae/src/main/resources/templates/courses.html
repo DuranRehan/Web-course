@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/courses.css}">
+    <title>Courses</title>
+</head>
+
+<body>
+    <main layout:fragment="content">
+
+        <h2 id="subtitle" th:text="#{list_course}">Liste des cours</h2>
+        <div th:if="${#lists.isEmpty(allcourses)}" th:un>
+            <p th:text="#{label_no_course_found}">Aucun cours n'est disponible</p>
+        </div>
+        <table th:unless="${#lists.isEmpty(allcourses)}">
+            <thead>
+                <tr>
+                    <th th:text="#{label_acronym}">Sigle</th>
+                    <th th:text="#{label_title}">Titre</th>
+                    <th th:text="#{label_credit}">Crédits</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course1 : ${allcourses}">
+                    <td>
+                        <a th:href="@{/courses/detail(id=${course1.id})}" th:text="${course1.id}"></a>
+                    </td>
+                    <td th:text="${course1.title}"></td>
+                    <td th:text="${course1.credits}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/courses}" th:object="${course}" method="post">
+            <label for="input-id">
+                <span th:text="#{label_acronym}">Sigle</span> : <input id="input-id" type="text" th:field="*{id}"
+                    th:errorclass="errorField" th:placeholder="#{label_acronym}" />
+                <p th:errors="*{id}" class="errorMsg"></p>
+            </label>
+            <label for="input-title">
+                <span th:text="#{label_title}">Titre</span> :<input type="text" id="input-title" th:field="*{title}"
+                    th:errorclass="errorField" th:placeholder="#{label_title}" />
+                <p th:errors="*{title}" class="errorMsg"></p>
+            </label>
+            <label for="input-credit">
+                <span th:text="#{label_credit}"> Credit</span> : <input type="number" min="1" max="10" id="input-credit"
+                    th:field="*{credits}" th:errorclass="errorField" th:placeholder="#{label_credit}" />
+                <p th:errors="*{credits}" class="errorMsg"></p>
+            </label>
+            <button type="submit" th:text="#{btn_add}">Ajouter</button>
+        </form>
+    </main>
+</body>
+
+</html>

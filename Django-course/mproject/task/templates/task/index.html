@@ -1,0 +1,29 @@
+{% extends "task/_base.html" %} 
+
+{% block title %}MProject - tâches{% endblock title%}
+{% block content %}
+    {% if tasks %}
+        <div class="container-sm l-3 d-flex flex-wrap border">
+            {% for task in tasks %}
+                <li class="list-group-item">
+                    {{ task.title }}
+                    {% if task.assignee %}
+                        <span>(assignée à {{ task.assignee.first_name }})</span>
+                    {% else %}
+                        <span>(non assignée)</span>
+                    {% endif %}
+                    <form action="{% url 'task:delete' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="close"><i class="fa-sharp fa-solid fa-trash"></i></button>
+                    </form>
+                </li>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="container m-4">
+            <alert class="alert alert-warning">Il n'y a aucune tâche enregistrée</alert>
+        </div>
+    {% endif %}
+    {% include 'task/_create_task_modal_.html' %}
+{% endblock content %}
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="carton_caracters" model="res.groups">
+        <field name="name">
+            carton_caracters
+        </field>
+    </record>
+</odoo>

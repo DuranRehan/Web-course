@@ -1,0 +1,49 @@
+<div th:fragment="studentlist(students)">
+    <h5>Student List</h5>
+
+    <div th:if="${#lists.isEmpty(students)}"> Aucuns étudiants inscrits</div>
+    <table th:unless="${#lists.isEmpty(students)}">
+        <thead>
+            <tr>
+                <td >Numéro</td>
+                <td >Nom</td>
+                <td >Section</td>
+                <td >Bloc</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.number}"></td>
+                <td ><a th:href="@{/student/detail(id=${student.number})}" th:text="${student.name}"></a></td>
+                <td th:text="${student.section}"></td>
+                <td th:text="${student.bloc}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form id="filter_student" th:action="@{/students}" th:object="${student}" method="post">
+
+        <label for="student_number" th:text="Numéro"></label>
+        <input type="number" name="number" th:field="*{number}" placeholder="Numéro étudiant" id="student_number">
+
+        <label for="student_name" th:text="Nom" ></label>
+        <input type="text" name="name"  th:field="*{name}" id="student_name">
+
+        <label for="student_section" th:text="Section" ></label>
+        <select name="section" id="student_section">
+            <option value="A">Tous</option>
+            <option value="G">G</option>
+            <option value="I">I</option>
+            <option value="R">R</option>
+        </select>
+
+        <label for="bloc_section" th:text="Bloc" ></label>
+        <select name="bloc" th:field="*{bloc}" id="bloc_section">
+            <option value="0" selected>Tous</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <input type="submit">
+    </form>
+</div>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action section -->
+        <record id="todo_app_action" model="ir.actions.act_window">
+            <field name="name">To-do Task</field>
+            <field name="res_model">todo.task</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="todo_app_partner_action" model="ir.actions.act_window">
+            <field name="name">Partners</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- Menu section -->
+        <menuitem id="todo_app_menu_main"
+            name="Todos"
+            action="todo_app_action"
+            sequence="10"
+        />
+
+        <menuitem
+            id="todo_app_config_menu"
+            name="Configuration"
+            sequence="10"
+            parent="todo_app_menu_main"
+        />
+
+        <menuitem
+            id="todo_app_partner_menu"
+            name="Contacts"
+            sequence="1"
+            parent="todo_app_config_menu"
+            action= "todo_app_partner_action"
+        />
+    </data>
+
+</odoo>

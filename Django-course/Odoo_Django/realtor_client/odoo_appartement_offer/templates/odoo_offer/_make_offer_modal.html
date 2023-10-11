@@ -1,0 +1,40 @@
+<div class="modal fade" id="offerModal{{appart.id}}" tabindex="-1" role="dialog" aria-labelledby="offerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="offerModalLabel">Make offer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+            </div>
+            <div class="modal-body">
+                <h6 class="modal-title" id="offerModalLabel">Appartement name - {{appart.name}}</h6>
+                <h7 class="modal-title" id="offerModalLabel">Current best offer : {{appart.buyer_bid}}€</h7>
+                <br>
+                <form action="{% url 'odoo_offer:updateOffer' %}" id="offer_form{{appart.id}}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="i_fname">First name</label>
+                        <input type="text" name="fname" class="form-control" id="i_fname" placeholder="Enter your first name" required>
+
+                        <label for="i_lname">Last name</label>
+                        <input type="text" name="lname" class="form-control" id="i_lname" placeholder="Enter your last name" required>
+                        
+                        <label for="i_email">Email</label>
+                        <input type="email" name="email" class="form-control" id="i_email" placeholder="Enter your email" required>
+
+                        <label for="i_offer">Offer</label>
+                        <input type="number" name="offer" class="form-control" id="i_offer" placeholder="Enter your offer" required  min="1" max="2147483647">
+
+                        <input type="hidden" name="appartement_id" value="{{appart.id}}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="offer_form{{appart.id}}">Submit offer</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

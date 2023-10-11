@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="partner_immobilier_esi" model="res.partner">
+            <field name="name">Immobilier ESI</field>
+            <field name="street">Rue Royale 67</field>
+            <field name="zip">1000</field>
+            <field name="email">esi@he2b.be</field>
+            <field name="city">Bruxelles</field>
+            <field name="phone">0123456789</field>
+            <field name="website">https://git.esi-bru.be/2022-2023/erpg5/projets/e13/53081-56055</field>
+        </record>
+
+        
+        <!-- Product category -->
+        <record id="categorie_appartement" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Appartements</field>
+        </record>
+
+
+        <!-- Product -->
+        <record model="product.product" id="realtor_product_appart01">
+            <field name="name">Appartement_01</field>
+            <field name="default_code">APPART_01</field>
+            <field name="appartement_id" eval="ref('realtor_appartement_01')" />
+            <field name="standard_price">300000</field>
+            <field name="list_price">300000</field>
+            <field name="type">product</field>
+            <field name="categ_id" ref="categorie_appartement"/>
+            <field name="purchase_ok">True</field>
+            <field name="sale_ok">True</field>
+            <field name="image_1920" type="base64" file="realtor/static/img/appart01.jpg" />
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record model="product.product" id="realtor_product_appart02">
+            <field name="name">Appartement_02</field>
+            <field name="default_code">APPART_02</field>
+            <field name="appartement_id" eval="ref('realtor_appartement_02')" />
+            <field name="standard_price">250000</field>
+            <field name="list_price">250000</field>
+            <field name="type">product</field>
+            <field name="categ_id" ref="categorie_appartement"/>
+            <field name="purchase_ok">True</field>
+            <field name="sale_ok">True</field>
+            <field name="image_1920" type="base64" file="realtor/static/img/appart02.jpg" />
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record model="product.product" id="realtor_product_appart03">
+            <field name="name">Appartement_03</field>
+            <field name="default_code">APPART_03</field>
+            <field name="appartement_id" eval="ref('realtor_appartement_03')" />
+            <field name="standard_price">150000</field>
+            <field name="list_price">150000</field>
+            <field name="type">product</field>
+            <field name="categ_id" ref="categorie_appartement"/>
+            <field name="purchase_ok">True</field>
+            <field name="sale_ok">True</field>
+            <field name="image_1920" type="base64" file="realtor/static/img/appart03.jpg" />
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        </record>
+
+        <record model="product.product" id="realtor_product_appart04">
+            <field name="name">Appartement_04</field>
+            <field name="default_code">APPART_04</field>
+            <field name="appartement_id" eval="ref('realtor_appartement_04')" />
+            <field name="standard_price">400000</field>
+            <field name="list_price">400000</field>
+            <field name="type">product</field>
+            <field name="categ_id" ref="categorie_appartement"/>
+            <field name="purchase_ok">True</field>
+            <field name="sale_ok">True</field>
+            <field name="image_1920" type="base64" file="realtor/static/img/appart04.jpg" />
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        </record>
+
+
+        <!-- Stock inventory -->
+        <record id="stock_appart" model="stock.inventory">
+            <field name="name">Appartements Inventory</field>
+            <field name="product_ids" eval="[
+                (4,ref('realtor_product_appart01')),
+                (4,ref('realtor_product_appart02')),
+                (4,ref('realtor_product_appart03')),
+                (4,ref('realtor_product_appart04')),
+            ]"
+            />
+        </record>
+
+
+        <!-- Stock lines -->
+         <record id="stock_appartement_line_1" model="stock.inventory.line">
+            <field name="product_id" ref="realtor_product_appart01"/>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="inventory_id" ref="stock_appart"/>
+            <field name="product_qty">1</field>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+
+        <record id="stock_appartement_line_2" model="stock.inventory.line">
+            <field name="product_id" ref="realtor_product_appart02"/>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="inventory_id" ref="stock_appart"/>
+            <field name="product_qty">1</field>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+
+        <record id="stock_appartement_line_3" model="stock.inventory.line">
+            <field name="product_id" ref="realtor_product_appart03"/>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="inventory_id" ref="stock_appart"/>
+            <field name="product_qty">1</field>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+
+        <record id="stock_appartement_line_4" model="stock.inventory.line">
+            <field name="product_id" ref="realtor_product_appart04"/>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="inventory_id" ref="stock_appart"/>
+            <field name="product_qty">1</field>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+
+        <!-- Stock function validate -->
+        <function model="stock.inventory" name="_action_start">
+            <function eval="[[('state','=','draft'),('id', '=', ref('stock_appart'))]]" model="stock.inventory" name="search"/>
+        </function>
+        <function model="stock.inventory" name="action_validate">
+            <function eval="[[('state','=','confirm'),('id', '=', ref('stock_appart'))]]" model="stock.inventory" name="search"/>
+        </function>
+
+    </data>
+</odoo>

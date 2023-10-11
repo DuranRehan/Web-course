@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${student.name}"></title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <div th:replace="~{fragments/detailsstudent.html::div(student=${student},annualProg=${annualProg})}"></div>
+        <button th:text="editer"></button>
+    </main>
+</body>
+</html>

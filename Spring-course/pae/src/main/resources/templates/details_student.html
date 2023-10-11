@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
+    <title th:text="|${student.matricule} - ${student.name}|"></title>
+
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <h1 id="subtitle" th:text="|${student.matricule} - ${student.name} - ${student.section}|">r</h1>
+        <div th:if="${#lists.isEmpty(student.courses)}" th:un>
+            <p th:text="#{label_no_course_added}">L'étudiant n'est pas encore inscrit à un cours</p>
+        </div>
+        <table th:unless="${#lists.isEmpty(student.courses)}">
+            <thead>
+                <tr>
+                    <th th:text="#{label_acronym}">Sigle</th>
+                    <th th:text="#{label_title}">Titre</th>
+                    <th th:text="#{label_credit}">Crédits</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course : ${student.courses}">
+                    <td>
+                        <a th:href="@{/courses/detail(id=${course.id})}" th:text="${course.id}"></a>
+                    </td>
+                    <td th:text="${course.title}"></td>
+                    <td th:text="${course.credits}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/students/detail/add_course_to_student}" method="post">
+            <input type="hidden" name="studentId" th:value="${student.matricule}"/>
+            <input type="text" name="courseId" th:placeholder="#{label_acronym}"/>
+            <input type="submit" th:value="#{btn_add_course}"/>
+        </form>
+    </main>
+</body>
+
+</html>

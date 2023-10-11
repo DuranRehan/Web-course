@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" layout:decorate="~{layout}">
+  <head>
+    <title layout:fragment="title">Index de la gestion des dépôts</title>
+  </head>
+
+  <body>
+    <main layout:fragment="content">
+      <h3 th:text="${question.text}"></h3>
+      <div th:if="${#lists.isEmpty(question.items)}"> Aucunes réponses possibles</div>
+    <table th:unless="${#lists.isEmpty(question.items)}">
+        <thead>
+            <tr>
+                <th>Added</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="answer : ${question.items}">
+                <td th:text="${answer.dateAdded}"></td>
+                <td th:text="${answer.agree}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/question/addAnswer}" th:object="${entity_answer}" method="post">
+        <input type="hidden" name="question" th:value="${question.number}"/>
+        <input type="radio" name="agree" value="true" th:field="*{agree}"/> Agree
+        <input type="radio" name="agree" value="false"/> Disagree
+        <input type="submit" value="Submit" />
+    </form>
+    </main>
+  </body>
+</html>

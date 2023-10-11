@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action -->
+        <record id="realtor_menu_action" model="ir.actions.act_window">
+            <field name="name">Realtor</field>
+            <field name="res_model">realtor.appartement</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="realtor_appartement_action" model="ir.actions.act_window">
+            <field name="name">Appartement</field>
+            <field name="res_model">realtor.appartement</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="realtor_appartement_partner_action" model="ir.actions.act_window">
+            <field name="name">Partners</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item -->
+        <menuitem
+            id="root_realtor_menu"
+            name="Realtor"
+            sequence="10"
+        />
+        <menuitem
+            id="realtor_appartement_menu"
+            name="Appartement"
+            sequence="10"
+            action="realtor_appartement_action"
+            parent="root_realtor_menu"
+        />
+        <menuitem
+            id="realtor_appartement_partner_menu"
+            name="Contacts"
+            sequence="15"
+            parent="root_realtor_menu"
+            action="realtor_appartement_partner_action"
+        />
+
+    </data>
+
+</odoo>

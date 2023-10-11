@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/courses.css}">
+    <title>Student</title>
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <h2 id="subtitle" th:text="#{list_student}">Liste des étudiants</h2>
+        <div th:if="${#lists.isEmpty(allstudents)}" th:un>
+            <p th:text="#{label_no_student_found}">Aucun étudiants n'est encore inscrit</p>
+        </div>
+        <div id="search-by-name">
+            <form th:action="@{/students/filter}" method="post">
+                <span th:text="#{label_search}">Recherche:</span> <input type="text" name="filter_name" id="filter_name"> <button type="submit" th:text="#{label_search}">Chercher</button>
+            </form>
+        </div>
+        <table th:unless="${#lists.isEmpty(allstudents)}">
+            <thead>
+                <tr>
+                    <th number th:text="#{label_student_number}">Matricule</th>
+                    <th th:text="#{label_name}">Nom</th>
+                    <th th:text="#{label_gender}">Genre</th>
+                    <th th:text="#{label_section}">Section</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${allstudents}">
+                    <td>
+                        <a th:href="@{/student/detail(id=${student.matricule})}" th:text="${student.matricule}"></a>
+                    </td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.genre}"></td>
+                    <td th:text="${student.section}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form th:action="@{/students}" th:object="${student}" method="post">
+            <label for="input-id">
+                <span th:text="#{label_name}">Nom</span> : <input id="input-id" type="text" th:field="*{name}" th:errorclass="errorField"
+                    th:placeholder="#{label_name}" />
+                <p th:errors="*{name}" class="errorMsg"></p>
+            </label>
+            <label for="radio-gender">
+                <span th:text="#{label_gender}">Genre</span> :
+                <span>
+                    <input type="radio" id="m-radio" name="genre" value="MASCULIN" th:field="*{genre}"
+                        th:errorclass="errorField" th:placeholder="#{label_gender}" />
+                    <label for="m-radio" th:text="#{label_masculin}">Masculin</label>
+                </span>
+                <span>
+                    <input type="radio" id="f-radio" name="genre" value="FEMININ" th:field="*{genre}"
+                        th:errorclass="errorField" th:placeholder="#{label_gender}" />
+                    <label for="f-radio" th:text="#{label_feminin}">Feminin</label>
+                </span>
+            </label>
+
+            <label for="radio-section">
+                <span th:text="#{label_section}">Section</span> :
+                <span>
+                    <input type="radio" id="gestion-radio" name="section" value="GESTION" th:field="*{section}"
+                        th:errorclass="errorField" th:placeholder="#{label_section}" />
+                    <label for="gestion-radio" th:text="#{label_management}">Gestion</label>
+                </span>
+
+                <span>
+                    <input type="radio" id="reseau-radio" name="section" value="RESEAU" th:field="*{section}"
+                        th:errorclass="errorField"  th:placeholder="#{label_section}" />
+                    <label for="reseau-radio" th:text="#{label_network}">Reseau</label>
+                </span>
+
+                <span>
+                    <input type="radio" id="indus-radio" name="section" value="INDUSTRIELLE" th:field="*{section}"
+                        th:errorclass="errorField"  th:placeholder="#{label_section}" />
+                    <label for="indus-radio" th:text="#{label_industrial}">Industrielle</label>
+                </span>
+            </label>
+
+            <br>
+            <button type="submit" th:text="#{btn_add}">Ajouter</button>
+        </form>
+    </main>
+</body>

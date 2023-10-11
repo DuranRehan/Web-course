@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" layout:decorate="~{layout}">
+
+<head>
+    <title layout:fragment="title">Index de la gestion des dépôts</title>
+</head>
+
+<body>
+    <main layout:fragment="content">
+        <a href="#">test</a>
+        <div class="container">
+            <div class="page-header">
+                <h1 class="display-4">Bienvenue sur Quizz-ESI</h1>
+            </div>
+        </div>
+        <div th:each=" question: ${questions}">
+            <span th:text="${question.questionNumber}"></span>
+            <a th:href="@{/details(id=${question.questionNumber})}" th:text="${question.questionText}"></a>
+            <div>
+                Positive answers : 
+                <span th:text="${question.nbPositiveAnswers}"> </span>
+            </div>
+            <div>
+                Negative answers : 
+                <span th:text="${question.nbNegativeAnswers}"> </span>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

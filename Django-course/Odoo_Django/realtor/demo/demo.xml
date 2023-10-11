@@ -1,0 +1,72 @@
+<odoo>
+  <data noupdate="1">
+    <record model="res.partner" id="realtor_buyer_01">
+      <field name="name">Patrick Star</field>
+        </record>
+    <record model="res.partner" id="realtor_buyer_02">
+      <field name="name">Squidward Tentacles</field>
+    </record>
+    <record model="res.partner" id="realtor_buyer_03">
+      <field name="name">Sandy Cheeks</field>
+    </record>
+
+    <record model="realtor.appartement" id="realtor_appartement_01">
+      <field name="name">Penthouse du Marais</field>
+      <field name="desc">
+        L'appartement se situe dans le quartier branché de la ville, à proximité de nombreux restaurants, bars et boutiques. 
+        Il possède un grand salon avec une cuisine ouverte, 2 chambres à coucher confortables et une salle de bain moderne. 
+        Le bâtiment dispose d'une piscine sur le toit et d'un gym pour les résidents.
+      </field>
+      <field name="image" type="base64" file="realtor/static/img/appart01.jpg" />
+      <field name="date_disponibility">2023-11-01</field>
+      <field name="minimal_price">300000</field>
+      <field name="superficy_appartement">80</field>
+      <field name="superficy_terrace">20</field>
+      <field name="buyer" eval="ref('realtor_buyer_02')" />
+      <field name="buyer_bid">299000</field>
+    </record>
+
+    <record model="realtor.appartement" id="realtor_appartement_02">
+      <field name="name">Le Duplex des Terreaux</field>
+      <field name="desc">
+        Cet appartement de charme se trouve dans un immeuble historique du centre-ville. 
+        Il comprend un salon lumineux avec une cheminée, une chambre à coucher spacieuse et une cuisine entièrement équipée. 
+        Le bâtiment est sécurisé et dispose d'un ascenseur.
+      </field>
+      <field name="image" type="base64" file="realtor/static/img/appart02.jpg" />
+      <field name="date_disponibility">2023-12-28</field>
+      <field name="minimal_price">250000</field>
+      <field name="superficy_appartement">70</field>
+      <field name="superficy_terrace">10</field>
+    </record>
+
+    <record model="realtor.appartement" id="realtor_appartement_03">
+      <field name="name">Le Studio de la Victoire</field>
+      <field name="desc">
+        Ce studio moderne se situe dans un quartier résidentiel calme. 
+        Il comprend une grande pièce de vie avec un coin cuisine, une salle de bain fonctionnelle et un balcon donnant sur un jardin intérieur. 
+        Le bâtiment dispose d'une buanderie et d'un parking sécurisé.
+      </field>
+      <field name="image" type="base64" file="realtor/static/img/appart03.jpg" />
+      <field name="date_disponibility">2023-07-28</field>
+      <field name="minimal_price">150000</field>
+      <field name="superficy_appartement">35</field>
+      <field name="superficy_terrace">0</field>
+    </record>
+
+    <record model="realtor.appartement" id="realtor_appartement_04">
+      <field name="name">Le Duplex des Calanques</field>
+      <field name="desc">
+        Cet appartement en duplex se trouve dans un quartier résidentiel agréable. 
+        Il comprend un salon spacieux avec une cuisine ouverte, 3 chambres à coucher confortables et 2 salles de bain. 
+        Le bâtiment dispose d'une piscine et d'un court de tennis.
+      </field>
+      <field name="image" type="base64" file="realtor/static/img/appart04.jpg" />
+      <field name="date_disponibility">2023-09-28</field>
+      <field name="minimal_price">400000</field>
+      <field name="superficy_appartement">110</field>
+      <field name="superficy_terrace">15</field>
+    </record>
+  </data>
+
+</odoo>
